@@ -11,13 +11,34 @@
 					<a class="nav-link active" aria-current="page" href="#">Home</a>
 				</li>
 				<li class="nav-item dropdown">
-					<a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Dropdown</a>
+					<a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Pièces</a>
 					<ul class="dropdown-menu">
 						<li>
-							<a class="dropdown-item" href="#">Action</a>
+							<a class="dropdown-item" href="#">Carte mère</a>
 						</li>
 						<li>
-							<a class="dropdown-item" href="#">Another action</a>
+							<a class="dropdown-item" href="#">Processeur</a>
+						</li>
+						<li>
+							<a class="dropdown-item" href="#">Mémoire PC</a>
+						</li>
+						<li>
+							<a class="dropdown-item" href="#">Carte Graphique</a>
+						</li>
+					</ul>
+				</li>
+
+				<li class="nav-item dropdown">
+					<a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Périphériques</a>
+					<ul class="dropdown-menu">
+						<li>
+							<a class="dropdown-item" href="#">écrans</a>
+						</li>
+						<li>
+							<a class="dropdown-item" href="#">Souris</a>
+						</li>
+						<li>
+							<a class="dropdown-item" href="#">Clavier</a>
 						</li>
 					</ul>
 				</li>
@@ -25,13 +46,38 @@
 		</div>
 
 		<ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-            <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="">Administration</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="">Mon Panier</a>
-            </li>
-		</ul>
 
+			{% if app.user %}
+				<li class="nav-item">
+					<a class="nav-link active" aria-current="page" href="">Administration</a>
+				</li>
+
+				<li class="nav-item dropdown">
+					<a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+						{{app.user.firstname}}
+					</a>
+					<ul class="dropdown-menu">
+						<li>
+							<a class="dropdown-item" href="#">Mon Compte</a>
+						</li>
+						<li>
+							<a class="dropdown-item" href="#">Mon Panier</a>
+						</li>
+					</ul>
+				</li>
+
+				<li class="nav-item">
+					<a class="nav-link active" aria-current="page" href="{{ path('app_logout') }}">Déconnexion</a>
+				</li>
+			{% else %}
+				<li class="nav-item">
+					<a class="nav-link active" aria-current="page" href="{{ path('app_register') }}">Inscription</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link active" aria-current="page" href="{{ path('app_login') }}">Connexion</a>
+				</li>
+			{% endif %}
+		</ul>
 	</div>
 </nav>
+
