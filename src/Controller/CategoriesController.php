@@ -15,13 +15,11 @@ class CategoriesController extends AbstractController
     #[Route('/{slug}', name:'list')]
     public function list(Categories $category, ProductsRepository $productsRepository, Request $request): Response
     {
-        // // On va chercher le numéro de page
-        // $page = $request->query->getInt('page', 1);
+        // // On va chercher le numéro de page dans l'url
+        $page = $request->query->getInt('page', 1);
 
         // // On va chercher la liste des produits de la catégorie
-        // $products = $productsRepository->findProductsPaginated($page, $category->getSlug(), 2);
-
-        $products = $category->getProducts();
+        $products = $productsRepository->findProductsPaginated($page, $category->getSlug(), 4);
 
         return $this->render('categories/list.html.twig', compact('category', 'products'));
     }
