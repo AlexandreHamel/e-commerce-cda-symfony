@@ -54,8 +54,8 @@ class ProductsController extends AbstractController
             $product->setSlug($slug->lower());
 
             // On arrondie le prix
-            $prix = $product->getPrice() * 100;
-            $product->setPrice($prix);
+            // $prix = $product->getPrice() * 100;
+            // $product->setPrice($prix);
 
             $em->persist($product);
             $em->flush();
@@ -77,23 +77,29 @@ class ProductsController extends AbstractController
         Request $request, 
         EntityManagerInterface $em, 
         SluggerInterface $slugger,
+        PictureService $pictureService,
         ): Response
     {
-        // On arrondie le prix
-        $prix = $product->getPrice() / 100;
-        $product->setPrice($prix);
 
         $productForm = $this->createForm(ProductsFormType::class, $product);
         $productForm->handleRequest($request);
 
         if($productForm->isSubmitted() && $productForm->isValid()){
 
+            $images = $productForm->get('images')->getData();
+
+            foreach($images as $image){
+                $folder = 'products';
+
+                $fichier = $pictureService->add($image, $folder, 300, 300);
+                
+                $img = new Images();
+                $img->setName($fichier);
+                $product->addImage($img);
+            }
+
             $slug = $slugger->slug($product->getName());
             $product->setSlug($slug->lower());
-
-            // On arrondie le prix
-            $prix = $product->getPrice() * 100;
-            $product->setPrice($prix);
 
             $em->persist($product);
             $em->flush();
@@ -108,5 +114,32 @@ class ProductsController extends AbstractController
             'product' => $product
         ]);
 
+    }
+
+    #[Route('/suppression/image/{id}', name: 'delete_image')]
+    public function deleteImage(
+        Images $image, 
+        Request $request, 
+        EntityManagerInterface $em, 
+        PictureService $pictureService
+        ): JsonResponse
+    {
+        $data = json_decode($request->getContent(), true);
+        
+        if($this->isCsrfTokenValid('delete' . $image->getId(), $data['_token']))
+        {
+            $nom = $image->getName();
+
+            if($pictureService->delete($nom, 'products', 300, 300)){
+
+                $em->remove($image);
+                $em->flush();
+
+                return new JsonResponse(['success' => true], 200);
+            }
+            return new JsonResponse(['error' => 'Erreur de suppression'], 400);
+        }
+         
+        return new JsonResponse(['error' => 'Token invalide'], 400);
     }
 }

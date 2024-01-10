@@ -24,13 +24,13 @@
                         {% for produit in produits %}
                             <tr>
                                 <td>{{ produit.id }}</td>
-                                {# <td><img src="{{ asset('assets/uploads/products/mini/300x300-' ~ produit.images[0].name ) }}" alt="{{ produit.name }}" class="img-thumbnail"></td> #}
+                                <td><img src="{{ asset('assets/uploads/products/mini/300x300-' ~ produit.images[0].name ) }}" alt="{{ produit.name }}" class="img-thumbnail"></td>
                                 <td>{{ produit.name }}</td>
                                 <td>{{ produit.price / 100 }}€</td>
                                 <td>{{ produit.stock }}</td>
                                 <td>{{ produit.categories.name }}</td>
                                 <td>
-                                    {# <a href="{{ path('admin_products_edit', {id: produit.id})}}" class="btn btn-success">Modifier</a> #}
+                                    <a href="{{ path('admin_products_edit', {id: produit.id})}}" class="btn btn-success">Modifier</a>
                                 </td>
                             </tr>
                         {% endfor %}
