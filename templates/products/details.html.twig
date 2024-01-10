@@ -6,14 +6,12 @@
 
 {% block body %}
 
-	<main class="container">
+	<main class="container my-5">
 		<section class="row">
 			<div class="col-12">
-				<h1>{{ product.name }}</h1>
-
+				<h1 class="mb-5">{{ product.name }}</h1>
 			</div>
 			<div class="col-6">
-
 				<div id="carouselExampleIndicators" class="carousel slide">
 					<div class="carousel-indicators">
                         {% for iteration in 1..product.images|length %}
@@ -21,13 +19,11 @@
                         {% endfor %}
 					</div>
 					<div class="carousel-inner">
-
                         {% for image in product.images %}
-                            <div class="carousel-item {{ (loop.first ) ? 'active' : '' }}">
+                            <div class="carousel-item {{ (loop.first ) ? 'active' : '' }} ">
 							    <img src=" {{ asset('assets/uploads/products/') ~ image.name }} " class="d-block w-100" alt="...">
 						    </div>
                         {% endfor %}
-
 					</div>
 					<button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
 						<span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -39,7 +35,6 @@
 					</button>
 				</div>
 			</div>
-
 			<div class="col-6">
 				<p>{{ product.description }}</p>
 				<p>Catégorie : {{ product.categories.name }}</p>
@@ -49,10 +44,8 @@
 				{% else %}
 					<p class="text-danger">Temporairement en rupture de stock</p>
 				{% endif %}
-				
 			</div>
 		</section>
-
 	</main>
 
 {% endblock %}
