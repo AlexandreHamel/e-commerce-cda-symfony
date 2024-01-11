@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Modifier une catégorie{% endblock %}
+
+{% block body %}
+    <main class="container my-5">
+        <section class="row">
+            <div class="col-6 mx-auto">
+                <h1>Modifier une catégorie</h1>
+                {% include "admin/categories/_form.html.twig" with {'button_label':'Modifier'} %}
+                {{ include('admin/categories/_delete_form.html.twig')}}
+            </div>
+        </section>
+    </main>          
+{% endblock %}

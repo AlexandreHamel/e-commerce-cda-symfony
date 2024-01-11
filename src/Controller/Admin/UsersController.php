@@ -16,4 +16,10 @@ class UsersController extends AbstractController
         $users = $usersRepository->findBy([], ['firstname' => 'asc']);
         return $this->render('admin/users/index.html.twig', compact('users'));
     }
+
+    #[Route('/edition/{id}', name: 'edit')]
+    public function edit()
+    {
+        
+    }
 }
