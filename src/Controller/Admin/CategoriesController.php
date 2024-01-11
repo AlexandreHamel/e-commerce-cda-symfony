@@ -76,7 +76,21 @@ class CategoriesController extends AbstractController
         }
 
         return $this->render('admin/categories/edit.html.twig', [
-            'categoryForm' => $categoryForm->createView()
+            'categoryForm' => $categoryForm->createView(),
+            'category' => $category
         ]);
+    }
+
+    #[Route('/suppression/{id}', name: 'delete', methods: ['POST'])]
+    public function delete(Categories $category, Request $request, EntityManagerInterface $em): Response
+    {
+        if($this->isCsrfTokenValid('delete'.$category->getId(), $request->request->get('_token'))) {
+            $em->remove($category);
+            $em->flush();
+        }
+
+        $this->addFlash('success', 'Catégorie supprimée avec succès');
+
+        return $this->redirectToRoute('admin_categories_index');
     }
 }

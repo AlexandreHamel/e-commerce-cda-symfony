@@ -53,10 +53,6 @@ class ProductsController extends AbstractController
             $slug = $slugger->slug($product->getName());
             $product->setSlug($slug->lower());
 
-            // On arrondie le prix
-            // $prix = $product->getPrice() * 100;
-            // $product->setPrice($prix);
-
             $em->persist($product);
             $em->flush();
 
@@ -114,6 +110,19 @@ class ProductsController extends AbstractController
             'product' => $product
         ]);
 
+    }
+
+    #[Route('/suppression/{id}', name: 'delete', methods: ['POST'])]
+    public function delete(Products $product,Request $request, EntityManagerInterface $em ): Response
+    {
+        if($this->isCsrfTokenValid('delete'.$product->getId(), $request->request->get('_token'))) {
+            $em->remove($product);
+            $em->flush();
+        }
+
+        $this->addFlash('success', 'Produit supprimé avec succès');
+
+        return $this->redirectToRoute('admin_products_index');
     }
 
     #[Route('/suppression/image/{id}', name: 'delete_image')]
