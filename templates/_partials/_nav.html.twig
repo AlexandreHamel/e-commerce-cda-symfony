@@ -8,27 +8,24 @@
 		<div class="collapse navbar-collapse" id="navbarSupportedContent">
 			<ul class="navbar-nav me-auto mb-2 mb-lg-0">
 				<li class="nav-item">
-					<a class="nav-link active" aria-current="page" href="{{ path('main') }}">Home</a>
-				</li>
-				<li class="nav-item dropdown">
-					<a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Pièces</a>
-					<ul class="dropdown-menu">
-						<li>
-							<a class="dropdown-item" href="#">Carte mère</a>
-						</li>
-						<li>
-							<a class="dropdown-item" href="#">Processeur</a>
-						</li>
-						<li>
-							<a class="dropdown-item" href="#">Mémoire PC</a>
-						</li>
-						<li>
-							<a class="dropdown-item" href="#">Carte Graphique</a>
-						</li>
-					</ul>
+					<a class="nav-link active" aria-current="page" href="{{ path('main') }}">Nos produits</a>
 				</li>
 
-				<li class="nav-item dropdown">
+				{# {% for category in categories %}
+					{% if category.parent == null %}
+						<li class="nav-item dropdown">
+							<a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">{{ category.name }}</a>
+						{% else %}
+							<ul class="dropdown-menu">
+								<li>
+									<a class="dropdown-item" href="{{ path('categories_list', {slug: category.slug}) }}">{{ category.name }}</a>
+								</li>
+							</ul>
+						</li>
+					{% endif %}
+				{% endfor %} #}
+
+				{# <li class="nav-item dropdown">
 					<a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Périphériques</a>
 					<ul class="dropdown-menu">
 						<li>
@@ -41,17 +38,18 @@
 							<a class="dropdown-item" href="#">Clavier</a>
 						</li>
 					</ul>
-				</li>
+				</li> #}
+
 			</ul>
 		</div>
 
 		<ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-
 			{% if app.user %}
-				<li class="nav-item">
-					<a class="nav-link active" aria-current="page" href="{{ path('admin_index') }}">Administration</a>
-				</li>
-
+				{% if is_granted('ROLE_PRODUCT_ADMIN') %}
+					<li class="nav-item">
+						<a class="nav-link active" aria-current="page" href="{{ path('admin_index') }}">Administration</a>
+					</li>
+				{% endif %}
 				<li class="nav-item dropdown">
 					<a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
 						{{app.user.firstname}}
@@ -65,7 +63,6 @@
 						</li>
 					</ul>
 				</li>
-
 				<li class="nav-item">
 					<a class="nav-link active" aria-current="page" href="{{ path('app_logout') }}">Déconnexion</a>
 				</li>

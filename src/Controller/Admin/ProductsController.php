@@ -122,7 +122,19 @@ class ProductsController extends AbstractController
             'productForm' => $productForm->createView(),
             'product' => $product
         ]);
+    }
 
+    #[Route('/suppression/{id}', name: 'delete', methods: ['POST'])]
+    public function delete(Products $product, Request $request, EntityManagerInterface $em): Response
+    {
+        if($this->isCsrfTokenValid('delete'.$product->getId(), $request->request->get('_token'))) {
+            $em->remove($product);
+            $em->flush();
+        }
+
+        $this->addFlash('success', 'Produit supprimée avec succès');
+
+        return $this->redirectToRoute('admin_products_index');
     }
 
     #[Route('/suppression/image/{id}', name: 'delete_image')]
