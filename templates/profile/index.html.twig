@@ -1,14 +1,17 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello ProfileController!{% endblock %}
+{% block title %}Mon compte{% endblock %}
 
 {% block body %}
     <main class="container my-5">
         <section class="row">
             <div class="col-6 mx-auto">
-                <h1>Mon compte</h1>
-                <a href="{{ path('app_profile_edit', {id: user.id})}}">Modifier mon compte</a>
-                <a href="#">Mes commandes</a>
+                <div class="col-8 border border-light bg-white p-3 rounded-4">
+                    <h1 class="text-dark mb-3">Mon compte  </h1>
+                    <h4 class="text-dark mb-2">Bonjour {{app.user.firstname}} {{app.user.lastname}}</h4>
+                    <a href="{{ path('app_profile_edit', {id: user.id})}}" class="btn btn-dark">Modifier mon compte</a>
+                    <a href="#" class="btn btn-dark">Mes commandes</a>
+                </div>
             </div>
         </section>
     </main>
