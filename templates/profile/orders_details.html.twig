@@ -26,7 +26,7 @@
 										<td>{{ detail.quantity }}</td>
 										<td>{{ detail.price / 100 }} €</td>
 									</tr>
-									{% set total = total + detail.price %}
+								{% set total = total + detail.price %}
 								{% endfor %}
 							</tbody>
 							<tfoot>
@@ -40,6 +40,8 @@
 						<p>Aucun détail de commande trouvé.</p>
 					{% endif %}
 				</div>
+                <a href="{{ path('app_profile_orders', {id: user.id})}}" class="btn btn-dark">Mes commandes</a>
+                <a href="{{ path('app_profile_index') }}" class="btn btn-dark ms-3">Mon Compte</a>
 			</div>
 		</section>
 	</main>

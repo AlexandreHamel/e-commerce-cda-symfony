@@ -23,7 +23,9 @@ class ProductsFormType extends AbstractType
             ->add('name', options:[
                 'label' => 'Nom'
             ])
-            ->add('description')
+            ->add('description', options:[
+                'label' => 'Déscription'
+            ])
             ->add('price', MoneyType::class, options:[
                 'label' => 'Prix',
                 'divisor' => 100,

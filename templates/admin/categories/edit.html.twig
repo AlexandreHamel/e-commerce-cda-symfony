@@ -8,6 +8,7 @@
             <div class="col-6 mx-auto">
                 <h1>Modifier une catégorie</h1>
                 {% include "admin/categories/_form.html.twig" with {'button_label':'Modifier'} %}
+                <a class="btn btn-dark mt-3" href="{{ path('admin_index') }}">Tableau de bord</a>
                 {{ include('admin/categories/_delete_form.html.twig')}}
             </div>
         </section>

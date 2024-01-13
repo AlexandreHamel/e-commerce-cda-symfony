@@ -2,8 +2,6 @@
 
 namespace App\Controller;
 
-use App\Entity\OrdersDetails;
-use App\Entity\Products;
 use App\Entity\Users;
 use App\Form\ProfilFormType;
 use App\Repository\OrdersDetailsRepository;
