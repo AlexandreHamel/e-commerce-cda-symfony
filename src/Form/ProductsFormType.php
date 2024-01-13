@@ -48,7 +48,6 @@ class ProductsFormType extends AbstractType
                         ->orderBy('c.name', 'ASC');
                 }
             ])
-
             ->add('images', FileType::class, [
                 'label' => false,
                 'multiple' => true,
@@ -64,7 +63,6 @@ class ProductsFormType extends AbstractType
                 ]
             ])
             ;
-
 
             //             ->add('productsPromotions', EntityType::class, [
             //                 'class' => ProductsPromotions::class,

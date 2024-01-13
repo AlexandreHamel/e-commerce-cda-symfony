@@ -81,8 +81,8 @@ class ProductsController extends AbstractController
         ): Response
     {
         // On arrondie le prix
-        $prix = $product->getPrice() / 100;
-        $product->setPrice($prix);
+        // $prix = $product->getPrice() / 100;
+        // $product->setPrice($prix);
 
         $productForm = $this->createForm(ProductsFormType::class, $product);
         $productForm->handleRequest($request);
@@ -107,8 +107,8 @@ class ProductsController extends AbstractController
             $product->setSlug($slug->lower());
 
             // On arrondie le prix
-            $prix = $product->getPrice() * 100;
-            $product->setPrice($prix);
+            // $prix = $product->getPrice() * 100;
+            // $product->setPrice($prix);
 
             $em->persist($product);
             $em->flush();

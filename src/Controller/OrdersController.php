@@ -14,6 +14,12 @@ use Symfony\Component\Routing\Annotation\Route;
 #[Route('/commandes', name: 'app_orders_')]
 class OrdersController extends AbstractController
 {
+    #[Route('/', name: 'index')]
+    public function index(): Response
+    { 
+        return $this->render('orders/index.html.twig');
+    }
+
     #[Route('/ajout', name: 'add')]
     public function add(SessionInterface $session, ProductsRepository $productsRepository, EntityManagerInterface $em): Response
     {

@@ -2,8 +2,11 @@
 
 namespace App\Controller;
 
+use App\Entity\OrdersDetails;
+use App\Entity\Products;
 use App\Entity\Users;
 use App\Form\ProfilFormType;
+use App\Repository\OrdersDetailsRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\File\Exception\AccessDeniedException;
@@ -20,7 +23,6 @@ class ProfileController extends AbstractController
         $user = $this->getUser();
 
         return $this->render('profile/index.html.twig', [
-            'controller_name' => 'Profil de l\'utilisateur',
             'user' => $user
         ]);
     }
@@ -28,9 +30,27 @@ class ProfileController extends AbstractController
     #[Route('/commandes', name: 'orders')]
     public function orders(): Response
     {
-        return $this->render('profile/index.html.twig', [
-            'controller_name' => 'Commandes de l\'utilisateur',
-            
+        // Récupérez l'utilisateur actuellement connecté
+        $user = $this->getUser();
+
+        // Récupérez les commandes de l'utilisateur
+        $orders = $user->getOrders();
+
+        return $this->render('profile/orders.html.twig', [
+            'user' => $user,
+            'orders' => $orders,
+        ]);
+    }
+
+    #[Route('/commandes/details/{orderId}', name: 'orders_details')]
+    public function ordersDetails($orderId, OrdersDetailsRepository $ordersDetailsRepository): Response
+    {
+        $user = $this->getUser();
+        $orderDetails = $ordersDetailsRepository->findBy(['orders' => $orderId]);
+
+        return $this->render('profile/orders_details.html.twig', [
+            'user' => $user,
+            'orderDetails' => $orderDetails,
         ]);
     }
 

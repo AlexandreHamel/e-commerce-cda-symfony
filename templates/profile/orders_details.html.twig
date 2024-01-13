@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Detail de ma commande
+{% endblock %}
+
+{% block body %}
+	<main class="container my-5">
+		<section class="row">
+			<div class="col-6 mx-auto">
+				<h1>Détails de la commande</h1>
+				{% if orderDetails|length > 0 %}
+					<div class="table-responsive rounded-3">
+						<table class="table">
+							<thead>
+								<tr>
+									<th>Produit</th>
+									<th>Quantité</th>
+									<th>Prix unitaire</th>
+								</tr>
+							</thead>
+							<tbody>
+								{% set total = 0 %}
+								{% for detail in orderDetails %}
+									<tr>
+										<td>{{ detail.products.name }}</td>
+										<td>{{ detail.quantity }}</td>
+										<td>{{ detail.price / 100 }} €</td>
+									</tr>
+									{% set total = total + detail.price %}
+								{% endfor %}
+							</tbody>
+							<tfoot>
+								<tr>
+									<td colspan="2">Total</td>
+									<td>{{ total /100 }}€</td>
+								</tr>
+							</tfoot>
+						</table>
+					{% else %}
+						<p>Aucun détail de commande trouvé.</p>
+					{% endif %}
+				</div>
+			</div>
+		</section>
+	</main>
+{% endblock %}
+

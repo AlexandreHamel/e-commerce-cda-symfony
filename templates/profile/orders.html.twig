@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mes commandes
+{% endblock %}
+
+{% block body %}
+	<main class="container my-5">
+		<section class="row">
+			<div class="col-6 mx-auto">
+				<h1 class="mb-4">Mes commandes</h1>
+				{% if orders|length > 0 %}
+					<div class="table-responsive rounded-3">
+						<table class="table">
+							<thead>
+								<tr>
+									<th>ID</th>
+									<th>Référence</th>
+									<th>Date de création</th>
+									<th>Action</th>
+								</tr>
+							</thead>
+							<tbody>
+								{% for order in orders %}
+									<tr>
+										<td>{{ order.id }}</td>
+										<td>{{ order.reference }}</td>
+										<td>{{ order.createdAt|date('Y-m-d H:i:s') }}</td>
+										<td>
+											<a href="{{ path('app_profile_orders_details', {'orderId': order.id}) }}" class="btn btn-dark" id="myInput">
+												Voir les détails
+											</a>
+										</td>
+									</tr>
+								{% endfor %}
+							</tbody>
+						</table>
+					</div>
+				{% else %}
+					<p>Aucune commande trouvée.</p>
+				{% endif %}
+			</div>
+		</section>
+	</main>
+{% endblock %}
+

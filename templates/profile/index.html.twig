@@ -10,7 +10,7 @@
                     <h1 class="text-dark mb-3">Mon compte  </h1>
                     <h4 class="text-dark mb-2">Bonjour {{app.user.firstname}} {{app.user.lastname}}</h4>
                     <a href="{{ path('app_profile_edit', {id: user.id})}}" class="btn btn-dark">Modifier mon compte</a>
-                    <a href="#" class="btn btn-dark">Mes commandes</a>
+                    <a href="{{ path('app_profile_orders', {id: user.id})}}" class="btn btn-dark">Mes commandes</a>
                 </div>
             </div>
         </section>
