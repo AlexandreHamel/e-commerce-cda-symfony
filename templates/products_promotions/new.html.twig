@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Ajouter une promotion
+{% endblock %}
+
+{% block body %}
+
+	<main class="container my-5">
+		<section class="row">
+			<div class="col-6 mx-auto">
+				<h1>Ajouter une promotion</h1>
+
+				{{ include('products_promotions/_form.html.twig') }}
+
+				<a href="{{ path('app_products_promotions_index') }}" class="btn btn-dark">Retour à la liste</a>
+			</div>
+		</section>
+	</main>
+
+
+{% endblock %}
+
