@@ -3,6 +3,7 @@
 namespace App\Form;
 
 use App\Entity\Categories;
+use App\Entity\ProductsPromotions;
 use App\Repository\CategoriesRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
@@ -28,6 +29,11 @@ class CategoriesFormType extends AbstractType
                 {
                     return $cr->createQueryBuilder('c')->where('c.parent IS NULL');
                 }
+            ])
+            ->add('productspromotions', EntityType::class, [
+                'class' => ProductsPromotions::class,
+                'choice_label' => 'name',
+                'label' => 'Promotion'
             ])
         ;
     }

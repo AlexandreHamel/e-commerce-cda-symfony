@@ -1,32 +1,46 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Catégorie {{ category.name }}{% endblock %}
+{% block title %}Catégorie
+	{{ category.name }}
+{% endblock %}
 
 {% block body %}
-    <main class="container my-5">
-        <section class="row">
-            <div class="col-12">
-                <h1 class="mb-4">Catégorie {{ category.name }} </h1>
-            </div>
-            {% for product in products.data %}
-                <div class="col-xl-3 col-lg-6 col-12 my-4">
-                    <article class="card h-100 box-reflect">
-                        <a href="{{ path('products_details', {"slug": product.slug}) }}">
-                            <img src="{{ asset('assets/uploads/products/mini/300x300-' ~ product.images[0].name)}}" class="card-img-top" alt="{{ product.name }}">
-                        </a>
-                        <div class="card-body">
-                            <h2 class="card-title"> {{ product.name }} </h2>
-                            <p class="card-title">  {{ product.description }} </p>
-                            <a href="{{ path('products_details', {"slug": product.slug}) }}" class="btn btn-dark">Voir les détails</a>
-                        </div>
-                    </article>
-                </div>
-            {% endfor %}
-            {% set path = 'categories_list' %}
-            {% set slug = category.slug %}
-            {% set pages = products.pages %}
-            {% set currentPage = products.page %}
-            {% include "_partials/_pagination.html.twig" %}
-        </section>
-    </main>
+	<main class="container my-5">
+		<section class="row">
+			<div class="col-12">
+				<h1 class="mb-4">Catégorie
+					{{ category.name }}
+				</h1>
+			</div>
+			{% if products.data is defined %}
+				{% for product in products.data %}
+					<div class="col-xl-3 col-lg-6 col-12 my-4">
+						<article class="card h-100 box-reflect">
+							<a href="{{ path('products_details', {"slug": product.slug}) }}">
+								<img src="{{ asset('assets/uploads/products/mini/300x300-' ~ product.images[0].name)}}" class="card-img-top" alt="{{ product.name }}">
+							</a>
+							<div class="card-body">
+								<h2 class="card-title">
+									{{ product.name }}
+								</h2>
+								<p class="card-title">
+									{{ product.description }}
+								</p>
+								<a href="{{ path('products_details', {"slug": product.slug}) }}" class="btn btn-dark">Voir les détails</a>
+							</div>
+						</article>
+					</div>
+				{% endfor %}
+			
+                {% set path = 'categories_list' %}
+                {% set slug = category.slug %}
+                {% set pages = products.pages %}
+                {% set currentPage = products.page %}
+                {% include "_partials/_pagination.html.twig" %}
+                    
+            {% else %}
+                <p>Aucun produit à afficher</p>
+            {% endif %}	
+		</section>
+	</main>
 {% endblock %}

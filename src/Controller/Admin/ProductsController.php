@@ -53,10 +53,6 @@ class ProductsController extends AbstractController
             $slug = $slugger->slug($product->getName());
             $product->setSlug($slug->lower());
 
-            // On arrondie le prix
-            // $prix = $product->getPrice() * 100;
-            // $product->setPrice($prix);
-
             $em->persist($product);
             $em->flush();
 
@@ -80,9 +76,6 @@ class ProductsController extends AbstractController
         PictureService $pictureService,
         ): Response
     {
-        // On arrondie le prix
-        // $prix = $product->getPrice() / 100;
-        // $product->setPrice($prix);
 
         $productForm = $this->createForm(ProductsFormType::class, $product);
         $productForm->handleRequest($request);
@@ -105,10 +98,6 @@ class ProductsController extends AbstractController
 
             $slug = $slugger->slug($product->getName());
             $product->setSlug($slug->lower());
-
-            // On arrondie le prix
-            // $prix = $product->getPrice() * 100;
-            // $product->setPrice($prix);
 
             $em->persist($product);
             $em->flush();

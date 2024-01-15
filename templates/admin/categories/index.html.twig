@@ -14,7 +14,11 @@
                             <th>ID</th>
                             <th>Nom</th>
                             <th>Parent</th>
-                            <th>N°</th>
+                            <th>Ordre</th>
+                            <th>Nom promo</th>
+                            <th>Valeur</th>
+                            <th>Début promo</th>
+                            <th>Fin promo</th>
                             <th>Actions</th>
                         </tr>
                     </thead>
@@ -29,6 +33,19 @@
                                     {% endif %}
                                 </td>
                                 <td>{{ categorie.categoryOrder}}</td>
+                                
+                                {% if categorie.productspromotions is not null %}
+                                <td> {{ categorie.productspromotions.name}} </td>
+                                <td>-{{ categorie.productspromotions.discount}} % </td>
+                                <td> {{ categorie.productspromotions.startDate ? categorie.productspromotions.startDate|date('Y-m-d') : ''}} </td>
+                                <td> {{ categorie.productspromotions.endDate ? categorie.productspromotions.endDate|date('Y-m-d') : ''}} </td>
+                                {% else %}
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                {% endif %}
+                                
                                 <td>
                                     <a href=" {{ path('admin_categories_edit', {id: categorie.id})}}} " class="btn btn-success">Modifier</a>
                                 </td>

@@ -21,7 +21,7 @@ class ProductsController extends AbstractController
     public function details(Products $product, PromotionService $promotionService): Response
     {
         $originalPrice = $product->getPrice();
-        $productPromotion = $product->getProductsPromotions();
+        $productPromotion = $product->getCategories()->getProductspromotions();
 
         if ($productPromotion !== null) {
             $discountedPrice = $promotionService->calculateDiscountedPrice($productPromotion, $originalPrice);

@@ -34,6 +34,10 @@ class Categories
     #[ORM\OneToMany(mappedBy: 'categories', targetEntity: Products::class)]
     private Collection $products;
 
+    #[ORM\ManyToOne(inversedBy: 'categories')]
+    #[ORM\JoinColumn(nullable: true)]
+    private ?ProductsPromotions $productspromotions = null;
+
     public function __construct()
     {
         $this->categories = new ArrayCollection();
@@ -137,6 +141,18 @@ class Categories
                 $product->setCategories(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getProductspromotions(): ?ProductsPromotions
+    {
+        return $this->productspromotions;
+    }
+
+    public function setProductspromotions(?ProductsPromotions $productspromotions): static
+    {
+        $this->productspromotions = $productspromotions;
 
         return $this;
     }

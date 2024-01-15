@@ -2,5 +2,6 @@
     {{ form_row(categoryForm.name) }}
     {{ form_row(categoryForm.parent) }}
     {{ form_row(categoryForm.categoryOrder) }}
+    {{ form_row(categoryForm.productspromotions.name)}}
     <button type="submit" class="btn btn-warning"> {{ button_label|default('Ajouter') }} </button>
 {{ form_end(categoryForm) }} 
