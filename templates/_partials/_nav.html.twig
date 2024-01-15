@@ -25,24 +25,8 @@
 					{% endif %}
 				{% endfor %} #}
 
-				{# <li class="nav-item dropdown">
-					<a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Périphériques</a>
-					<ul class="dropdown-menu">
-						<li>
-							<a class="dropdown-item" href="#">écrans</a>
-						</li>
-						<li>
-							<a class="dropdown-item" href="#">Souris</a>
-						</li>
-						<li>
-							<a class="dropdown-item" href="#">Clavier</a>
-						</li>
-					</ul>
-				</li> #}
-
 			</ul>
 		
-
 			<ul class="navbar-nav ms-auto mb-2 mb-lg-0">
 				{% if app.user %}
 					{% if is_granted('ROLE_PRODUCT_ADMIN') %}

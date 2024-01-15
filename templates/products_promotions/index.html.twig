@@ -7,7 +7,7 @@
 
 	<main class="container my-5">
 		<section class="row">
-			<div class="col-6 mx-auto">
+			<div class="col-8 mx-auto">
 				<h1>Liste des promotions</h1>
 
                 <div class="table-responsive rounded-3">
@@ -15,9 +15,11 @@
 					<thead>
 						<tr>
 							<th>Id</th>
-							<th>Start_date</th>
-							<th>End_date</th>
-							<th>Discount</th>
+							<th>Nom</th>
+							<th>Description</th>
+							<th>Date de début</th>
+							<th>Date de fin</th>
+							<th>Valeur</th>
 							<th>actions</th>
 						</tr>
 					</thead>
@@ -25,6 +27,8 @@
 						{% for products_promotion in products_promotions %}
 							<tr>
 								<td>{{ products_promotion.id }}</td>
+								<td>{{ products_promotion.name}}</td>
+								<td>{{ products_promotion.description }}</td>
 								<td>{{ products_promotion.startDate ? products_promotion.startDate|date('Y-m-d H:i:s') : '' }}</td>
 								<td>{{ products_promotion.endDate ? products_promotion.endDate|date('Y-m-d H:i:s') : '' }}</td>
 								<td>{{ products_promotion.discount }}</td>
@@ -41,6 +45,7 @@
 				</table>
                 </div>
 				<a href="{{ path('app_products_promotions_new') }}" class="btn btn-success">Ajouter une promotion</a>
+				<a href="{{ path('admin_index') }}" class="btn btn-dark ms-3">Tableau de bord</a>
 			</div>
 		</section>
 	</main>

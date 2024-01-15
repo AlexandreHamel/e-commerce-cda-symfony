@@ -21,6 +21,12 @@ class ProductsPromotionsType extends AbstractType
             ->add('discount', options:[
                 'label' => 'Valeur de la promotion'
             ])
+            ->add('name', options:[
+                'label' => 'Nom'
+            ])
+            ->add('description', options:[
+                'label' => 'Description'
+            ])
         ;
     }
 
